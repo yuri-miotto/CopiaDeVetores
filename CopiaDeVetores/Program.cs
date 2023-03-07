@@ -1,59 +1,71 @@
 ﻿internal class Program
 {
     private static void Main(string[] args)
-    {
-        int num;
-        int[] lista1 = new int[5];
-        int[] lista2 = new int[5];
-        int[] lista3 = new int[10];
+    {        
+        int[] A = new int[5];
+        int[] B = new int[5];
+        int[] C = new int[10];
 
-        for (int i = 0; i < lista1.Length; i++)
+        LerVetor(A, "Vetor A");
+        LerVetor(B, "Vetor B");
+
+        C = UnirVetores(A, B);
+
+        ImprimirVetor(A, "Vetor A");
+        ImprimirVetor(B, "Vetor B");
+        ImprimirVetor(C, "Vetor C");
+
+        OrdenarVetor(C);
+
+        ImprimirVetor(C, "Vetor C");
+
+        void OrdenarVetor(int[] vetor)
         {
-           
-            Console.WriteLine("Digite um número para a primeira lista...");
-            num = int.Parse(Console.ReadLine());
-            lista1[i] = num;
-            
+            int i, j;
+            for(i = 0; i < vetor.Length - 1; i++)
+            {
+                for(j=i+1; j < vetor.Length; j++)
+                {
+                    if (vetor[i] > vetor[j])
+                    {
+                        int aux = vetor[i];
+                        vetor[i] = vetor[j];
+                        vetor[j] = aux;
+                    }
+                }
+            }
         }
 
-        for (int i = 0; i < lista2.Length; i++)
+        void LerVetor(int[] aux, string texto)
         {
-            Console.WriteLine("Digite um número para a segunda lista...");
-            num = int.Parse(Console.ReadLine());
-            lista2[i] = num;
+            //Leitura do vetor
+            Console.WriteLine("\nDigite os valores do {0}: ", texto);
+            for (int i = 0; i < aux.Length; i++)
+            {
+                Console.Write("\nVetor[{0}] = ", i);
+                aux[i] = int.Parse(Console.ReadLine());
+            }
         }
 
-        Console.Write("Primeira lista: ");
-        for (int i = 0; i < lista1.Length; i++)
+        void ImprimirVetor(int[] aux, string texto)
         {
-            Console.Write(lista1[i] + " ");
+            Console.WriteLine("\nOs valores do {0} são: ", texto);
+            for (int i = 0; i < aux.Length; i++)
+            {
+                Console.WriteLine("\nVetor[{0}] = {1}", i, aux[i]);
+            }
         }
 
-        Console.WriteLine();
-
-        Console.Write("Segunda lista: ");
-        for (int i = 0; i < lista2.Length; i++)
+        int[] UnirVetores(int[] A, int[] B)
         {
-            Console.Write(lista2[i] + " ");
+            int[] aux = new int[10];
+            for (int i = 0; i < A.Length; i++)
+                aux[i] = A[i];
+            for (int i = 0; i < B.Length; i++)
+                aux[i + 5] = B[i];
+            return aux;
         }
 
-        Console.WriteLine();
-
-        for (int i = 0; i<5; i++)
-        {
-            lista3[i] = lista1[i];
-        }
-
-        for (int i = 5; i < 10; i++)
-        {
-            lista3[i] = lista2[i - 5];
-        }
-
-        Console.Write("Total das duas listas: ");
-        for (int i = 0; i < lista3.Length; i++)
-        {
-            Console.Write(lista3[i] + " ");
-        }
 
     }
 }
